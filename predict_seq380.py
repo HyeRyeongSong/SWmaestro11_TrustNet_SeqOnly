@@ -40,7 +40,7 @@ VIDEO_FACE_MODEL_TRACK_STEP = 2
 VIDEO_SEQUENCE_MODEL_SEQUENCE_LENGTH = 7
 VIDEO_SEQUENCE_MODEL_TRACK_STEP = 14
 
-VIDEO_SEQUENCE_MODEL_WEIGHTS_PATH = 'efficientnet-b7_ns_seq_aa-original-mstd0.5_100k_v4_cad79a_380v2/snapshot_400000.fp16.pth'
+VIDEO_SEQUENCE_MODEL_WEIGHTS_PATH = 'efficientnet-b7_ns_seq_aa-original-mstd0.5_100k_v4_cad79a_380v2/snapshot_380000.fp16.pth'
 #FIRST_VIDEO_FACE_MODEL_WEIGHTS_PATH = 'efficientnet-b7_ns_aa-original-mstd0.5_large_crop_100k_v4_cad79a/snapshot_100000.fp16.pth'
 #SECOND_VIDEO_FACE_MODEL_WEIGHTS_PATH = 'efficientnet-b7_ns_aa-original-mstd0.5_re_100k_v4_cad79a/snapshot_100000.fp16.pth'
 
@@ -333,6 +333,7 @@ def main():
 
     video_name_to_score = {}
 
+    iter = 0
     for video_sample in loader:
         frames = video_sample[0]['frames']
         detector_frames = frames[::DETECTOR_STEP]
@@ -394,6 +395,15 @@ def main():
         video_name_to_score[video_name] = video_score
         print('NUM DETECTION FRAMES: {}, VIDEO SCORE: {}. {}'.format(len(detections), video_name_to_score[video_name],
                                                                      video_rel_path))
+        iter += 1
+        if iter % 15 == 0:
+            os.makedirs(os.path.dirname(config['SUBMISSION_PATH_380V2_MID'].format(iter)), exist_ok=True)
+            with open(config['SUBMISSION_PATH_380V2_MID'].format(iter), 'w') as f:
+                f.write('filename,label\n')
+                for video_name in sorted(video_name_to_score):
+                    score = video_name_to_score[video_name]
+                    f.write('{},{}\n'.format(video_name, score))
+
 
     os.makedirs(os.path.dirname(config['SUBMISSION_PATH_380V2']), exist_ok=True)
     with open(config['SUBMISSION_PATH_380V2'], 'w') as f:

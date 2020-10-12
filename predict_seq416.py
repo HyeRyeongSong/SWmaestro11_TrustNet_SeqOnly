@@ -49,7 +49,7 @@ VIDEO_TARGET_FPS = 15
 VIDEO_NUM_WORKERS = 0
 
 os.environ['CUDA_DEVICE_ORDER']='PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES']='1'
+os.environ['CUDA_VISIBLE_DEVICES']='0'
 
 
 class UnlabeledVideoDataset(Dataset):
@@ -333,6 +333,7 @@ def main():
 
     video_name_to_score = {}
 
+    iter = 0
     for video_sample in loader:
         frames = video_sample[0]['frames']
         detector_frames = frames[::DETECTOR_STEP]
@@ -392,8 +393,16 @@ def main():
         video_score = float((track_probs * weights).sum() / weights.sum())
 
         video_name_to_score[video_name] = video_score
-        print('NUM DETECTION FRAMES: {}, VIDEO SCORE: {}. {}'.format(len(detections), video_name_to_score[video_name],
-                                                                     video_rel_path))
+        print('NUM DETECTION FRAMES: {}, VIDEO SCORE: {}. {}'.format(len(detections), video_name_to_score[video_name], video_rel_path))
+        
+        iter += 1
+        if iter % 15 == 0:
+            os.makedirs(os.path.dirname(config['SUBMISSION_PATH_416_MID'].format(iter)), exist_ok=True)
+            with open(config['SUBMISSION_PATH_416_MID'].format(iter), 'w') as f:
+                f.write('filename,label\n')
+                for video_name in sorted(video_name_to_score):
+                    score = video_name_to_score[video_name]
+                    f.write('{},{}\n'.format(video_name, score))
 
     os.makedirs(os.path.dirname(config['SUBMISSION_PATH_416']), exist_ok=True)
     with open(config['SUBMISSION_PATH_416'], 'w') as f:

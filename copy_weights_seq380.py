@@ -10,7 +10,7 @@ WEIGHTS_MAPPING = {
     'snapshots/efficientnet-b7_ns_seq_aa-original-mstd0.5_100k/snapshot_100000.pth': 'efficientnet-b7_ns_seq_aa-original-mstd0.5_100k_v4_cad79a/snapshot_100000.fp16.pth'}
 '''
 
-WEIGHTS_MAPPING = { 'snapshots/efficientnet-b7_ns_seq_aa-original-mstd0.5_100k_380v2/snapshot_400000.pth': 'efficientnet-b7_ns_seq_aa-original-mstd0.5_100k_v4_cad79a_380v2/snapshot_400000.fp16.pth' }
+WEIGHTS_MAPPING = { 'snapshots/efficientnet-b7_ns_seq_aa-original-mstd0.5_100k_380v2/snapshot_380000.pth': 'efficientnet-b7_ns_seq_aa-original-mstd0.5_100k_v4_cad79a_380v2/snapshot_380000.fp16.pth' }
 
 SRC_DETECTOR_WEIGHTS = 'external_data/WIDERFace_DSFD_RES152.pth'
 DST_DETECTOR_WEIGHTS = 'WIDERFace_DSFD_RES152.fp16.pth'
