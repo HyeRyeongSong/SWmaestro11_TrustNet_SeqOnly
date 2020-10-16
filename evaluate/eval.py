@@ -36,7 +36,7 @@ help="Real Threshold")
                 rdr = csv.reader(f)
                 next(rdr)
                 for line in rdr:
-                    print(line)
+                    #print(line)
                     total += 1 
                     json_object = json_data[line[0]]
                     if json_object['label'] == 'FAKE':

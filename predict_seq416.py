@@ -40,7 +40,7 @@ VIDEO_FACE_MODEL_TRACK_STEP = 2
 VIDEO_SEQUENCE_MODEL_SEQUENCE_LENGTH = 7
 VIDEO_SEQUENCE_MODEL_TRACK_STEP = 14
 
-VIDEO_SEQUENCE_MODEL_WEIGHTS_PATH = 'efficientnet-b7_ns_seq_aa-original-mstd0.5_100k_v4_cad79a_416/snapshot_400000.fp16.pth'
+VIDEO_SEQUENCE_MODEL_WEIGHTS_PATH = 'efficientnet-b7_ns_seq_aa-original-mstd0.5_100k_v4_cad79a_416/snapshot_364000.fp16.pth'
 #FIRST_VIDEO_FACE_MODEL_WEIGHTS_PATH = 'efficientnet-b7_ns_aa-original-mstd0.5_large_crop_100k_v4_cad79a/snapshot_100000.fp16.pth'
 #SECOND_VIDEO_FACE_MODEL_WEIGHTS_PATH = 'efficientnet-b7_ns_aa-original-mstd0.5_re_100k_v4_cad79a/snapshot_100000.fp16.pth'
 
